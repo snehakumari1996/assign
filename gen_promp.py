@@ -1,19 +1,19 @@
 from google.cloud import aiplatform
 
-# Initialize Vertex AI client with your project and location
+
 aiplatform.init(project='your-google-cloud-project-id', location='us-central1')
 
-# Function to generate a review using Vertex AI Gemini Model
+
 def generate_review(prompt):
     model = aiplatform.TextGenerationModel(model_name="text-bison")
     response = model.predict(
         content=prompt,
-        temperature=0.7,  # Controls randomness of output
-        max_output_tokens=150  # Controls length of the output
+        temperature=0.7, 
+        max_output_tokens=150 
     )
     return response.text
 
-# List of 20 prompts for generating reviews
+
 prompts = [
     "Write a short review for the product 'Vitamin D3 Supplement' in the category of 'Vitamins'. Make it positive and mention how it improved energy levels.",
     "Write a medium review for 'Magnesium Capsules' in the 'Supplements' category with a rating of 3. Mention average results and neutral feedback.",
@@ -37,13 +37,11 @@ prompts = [
     "Write a short review for 'Vitamin C Gummies'. Mention immunity boost and great taste. Make it positive."
 ]
 
-# Generate reviews and store them in a list
 generated_reviews = []
 for prompt in prompts:
     review = generate_review(prompt)
     generated_reviews.append(review)
 
-# Create a DataFrame with the results
 import pandas as pd
 
 data = {
@@ -59,9 +57,7 @@ data = {
                      'Medium', 'Short', 'Short', 'Medium', 'Short', 'Medium', 'Short', 'Medium', 'Medium', 'Short']
 }
 
-# Save DataFrame to CSV
 reviews_df = pd.DataFrame(data)
 reviews_df.to_csv('synthetic_reviews_assignment.csv', index=False)
 
-# Display generated reviews
 reviews_df
