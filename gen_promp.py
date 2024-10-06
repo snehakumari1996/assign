@@ -1,7 +1,7 @@
 from google.cloud import aiplatform
 
 
-aiplatform.init(project='your-google-cloud-project-id', location='us-central1')
+aiplatform.init(project='arctic-system-437819-j8', location='asia-south1')
 
 
 def generate_review(prompt):
